@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🐠 Hồ cá vui nhộn 🐟</title>
+    <link rel="stylesheet" href="mystyle.css" />
+  </head>
+  <body>
+    <h1 class="title">🐟 Hồ cá vui nhộn 🐟</h1>
+
+    <div class="controls">
+      <h3>🎧 Chọn nhạc</h3>
+      <label
+        ><input type="radio" name="music" id="song1" checked /> Baby
+        Shark</label
+      >
+      <label><input type="radio" name="music" id="song2" /> Lạc trôi</label>
+      <label><input type="radio" name="music" id="song3" /> Đáy Biển </label>
+
+      <h3>🌅 Chọn cảnh</h3>
+      <label><input type="radio" name="bg" id="bg1" checked /> Cảnh 1</label>
+      <label><input type="radio" name="bg" id="bg2" /> Cảnh 2</label>
+      <label><input type="radio" name="bg" id="bg3" /> Cảnh 3</label>
+    </div>
+
+    <!-- Hồ cá -->
+    <div class="aquarium">
+      <img src="/images/hoca.png" class="background bg1" alt="Cảnh 1" />
+      <img src="/images/hoca2.png" class="background bg2" alt="Cảnh 2" />
+      <img src="/images/hotoi.png" class="background bg3" alt="Cảnh 3" />
+
+      <img src="/images/beca.png" class="fish fish1" alt="Cá mập" />
+      <img src="/images/camp-o.png" class="fish fish2" alt="Cá nhỏ" />
+      <img src="/images/tholanduong.png" class="fish fish3" alt="Rùa" />
+      <img src="/images/camap.png" class="fish fish4" alt="Thợ lặn" />
+      <img src="/images/rua.png" class="fish fish5" alt="Rùa biển" />
+      <img src="/images/camau.png" class="fish fish6" alt="Cá vàng" />
+      <img src="/images/tuoc.png" class="fish fish7" alt="Cá hồi" />
+      <img src="/images/caheo.png" class="fish fish8" alt="Cá mực" />
+    </div>
+
+    <audio id="audio1" autoplay loop>
+      <source src="/audio/Baby Shark.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="audio2" loop>
+      <source src="/audio/Lạc Trôi.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="audio3" loop>
+      <source src="/audio/Đáy Biển.mp3" type="audio/mpeg" />
+    </audio>
+
+    <footer>Hồ cá vui nhộn | Thiết kế bởi Tạ Hồng Phúc</footer>
+    <script>
+      // ===== XỬ LÝ NHẠC =====
+      const audios = [
+        document.getElementById("audio1"),
+        document.getElementById("audio2"),
+        document.getElementById("audio3"),
+      ];
+
+      const musicRadios = document.querySelectorAll('input[name="music"]');
+      musicRadios.forEach((radio, index) => {
+        radio.addEventListener("change", () => {
+          audios.forEach((audio, i) => {
+            if (i === index) audio.play();
+            else {
+              audio.pause();
+              audio.currentTime = 0;
+            }
+          });
+        });
+      });
+
+      // ===== XỬ LÝ NỀN =====
+      const backgrounds = document.querySelectorAll(".background");
+      const bgRadios = document.querySelectorAll('input[name="bg"]');
+      bgRadios.forEach((radio, index) => {
+        radio.addEventListener("change", () => {
+          backgrounds.forEach((bg, i) => {
+            bg.style.display = i === index ? "block" : "none";
+          });
+        });
+      });
+      backgrounds.forEach((bg, i) => {
+        bg.style.display = i === 0 ? "block" : "none";
+      });
+
+     
+      const fishes = document.querySelectorAll(".fish");
+      const aquarium = document.querySelector(".aquarium");
+
+      
+      const fishData = [];
+      fishes.forEach((fish) => {
+        fishData.push({
+          el: fish,
+          x: Math.random() * (aquarium.clientWidth - 80),
+          y: Math.random() * (aquarium.clientHeight - 80),
+          vx: (Math.random() - 0.5) * 2, // vận tốc X
+          vy: (Math.random() - 0.5) * 2, // vận tốc Y
+        });
+      });
+
+      function animateFish() {
+        fishData.forEach((fish) => {
+          fish.x += fish.vx;
+          fish.y += fish.vy;
+
+          
+          if (fish.x < 0 || fish.x > aquarium.clientWidth - 80) fish.vx *= -1;
+          if (fish.y < 0 || fish.y > aquarium.clientHeight - 80) fish.vy *= -1;
+
+          fish.el.style.left = fish.x + "px";
+          fish.el.style.top = fish.y + "px";
+
+          
+          fish.el.style.transform = fish.vx > 0 ? "scaleX(1)" : "scaleX(-1)";
+        });
+
+        requestAnimationFrame(animateFish); 
+      }
+
+      animateFish();
+    </script>
+  </body>
+</html>

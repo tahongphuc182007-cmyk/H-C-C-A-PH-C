@@ -1,0 +1,175 @@
+/* Tổng thể */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: linear-gradient(to bottom, #6ec5ff, #004b8d);
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Tiêu đề */
+.title {
+  font-size: 2.3em;
+  margin-top: 20px;
+  text-shadow: 0 0 10px #003;
+}
+
+/* Vùng điều khiển */
+.controls {
+  margin: 15px 0;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: left;
+}
+.controls h3 {
+  margin-bottom: 5px;
+}
+.controls label {
+  display: inline-block;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+/* Hồ cá */
+.aquarium {
+  position: relative;
+  width: 100vw;
+  height: 70vh;
+  border-top: 5px solid #00bfff;
+  border-bottom: 5px solid #00bfff;
+  overflow: hidden;
+}
+
+/* Nền */
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.bg1 {
+  opacity: 1;
+}
+
+/* Cá */
+.fish {
+  position: absolute;
+  z-index: 2;
+  width: 100px;
+}
+.fish1 {
+  bottom: 60px;
+  left: -150px;
+  animation: swimRight 18s linear infinite;
+}
+.fish2 {
+  top: 120px;
+  right: -150px;
+  width: 90px;
+  animation: swimLeft 22s linear infinite;
+}
+.fish3 {
+  bottom: 100px;
+  left: -180px;
+  width: 80px;
+  animation: swimRight 25s linear infinite;
+}
+.fish4 {
+  top: 50px;
+  left: -150px;
+  width: 130px;
+  animation: swimRight 28s linear infinite;
+}
+.fish5 {
+  bottom: 10px;
+  right: -150px;
+  width: 90px;
+  animation: swimLeft 26s linear infinite;
+}
+
+/* Animation bơi */
+@keyframes swimRight {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  50% {
+    transform: translateX(110vw) scaleX(1);
+  }
+  51% {
+    transform: translateX(110vw) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) scaleX(-1);
+  }
+}
+
+@keyframes swimLeft {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  50% {
+    transform: translateX(-110vw) scaleX(1);
+  }
+  51% {
+    transform: translateX(-110vw) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) scaleX(-1);
+  }
+}
+
+/* Footer */
+footer {
+  margin: 10px 0;
+  opacity: 0.8;
+}
+
+/* ==== Hiệu ứng thay đổi nhạc & nền ==== */
+#song1:checked ~ #audio1 {
+  display: block;
+}
+#song1:checked ~ #audio2,
+#song1:checked ~ #audio3 {
+  display: none;
+}
+
+#song2:checked ~ #audio2 {
+  display: block;
+}
+#song2:checked ~ #audio1,
+#song2:checked ~ #audio3 {
+  display: none;
+}
+
+#song3:checked ~ #audio3 {
+  display: block;
+}
+#song3:checked ~ #audio1,
+#song3:checked ~ #audio2 {
+  display: none;
+}
+
+/* Ẩn tất cả audio ban đầu */
+audio {
+  display: none;
+}
+
+/* Cảnh */
+#bg1:checked ~ .aquarium .bg1 {
+  opacity: 1;
+}
+#bg2:checked ~ .aquarium .bg2 {
+  opacity: 1;
+}
+#bg3:checked ~ .aquarium .bg3 {
+  opacity: 1;
+}
